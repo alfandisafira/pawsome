@@ -1,11 +1,8 @@
-import React from "react";
-import propTypes from "prop-types";
-
 import Logo from "../Fragments/Logo";
 
 const Footer = () => {
   return (
-    <footer className="container border border-black/10 shadow-2xl shadow-black flex justify-center items-start gap-28 mt-28 py-10 px-[135px]">
+    <footer className="border border-black/10 shadow-2xl shadow-black flex justify-center items-start gap-28 mt-28 py-10 px-[80px]">
       <Logo
         imageClassName="w-6 h-6"
         textClassName="text-2xl leading-9"

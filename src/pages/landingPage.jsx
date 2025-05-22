@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Button from "../components/Elements/Button";
 
@@ -26,48 +26,9 @@ import AdoptTutorial from "../assets/images/adopt-tutorial.png";
 import NextLeft from "../assets/images/icons/next-left.png";
 import NextRight from "../assets/images/icons/next-right.png";
 
-import TestimonyDanielle from "../assets/images/testimony-danielle.png";
-import TestimonyRubby from "../assets/images/testimony-rubby.png";
-import TestimonyJames from "../assets/images/testimony-james.png";
+import { tutorials, testimonies } from "../contants";
 
 export default function LandingPage() {
-  const tutorials = [
-    {
-      order: "First",
-      highlight: "Fulfill the requirement",
-      content:
-        "Meet our adoption requirements and unlock the joy of bringing home your perfect companion.",
-    },
-    {
-      order: "Second",
-      highlight: "Schedule a visit",
-      content:
-        "Visit Pawsome, meet our pets, and meet the one that captures your heart.",
-    },
-    {
-      order: "Third",
-      highlight: "Submit application",
-      content: "Commit your adoption by submitting application at Pawsome!",
-    },
-    {
-      order: "Fourth",
-      highlight: "Adoption fee payment",
-      content:
-        "Seal the bond with a payment and bring your new family member home",
-    },
-    {
-      order: "Fifth",
-      highlight: "Finalizing your adoption",
-      content: "Finalize your adoption and embrace a lifetime of love",
-    },
-    {
-      order: "Sixth",
-      highlight: "It's done, congratulation!",
-      content:
-        "Lastly we will give you the guide and how to take care of your new family member.",
-    },
-  ];
-
   let fragmentStep = Math.ceil(tutorials.length / 2);
   let [currentStep, setCurrentStep] = useState(0);
 
@@ -75,27 +36,6 @@ export default function LandingPage() {
     if (currentStep == limitStep) setCurrentStep(0);
     else setCurrentStep(currentStep + increment);
   };
-
-  const testimonies = [
-    {
-      name: "Danielle",
-      imageSource: TestimonyDanielle,
-      imageAlt: "testimony-danielle.png",
-      text: "I can't express how grateful I am for adopting Milo from Pawsome. He has become my greatest source of joy, bringing unconditional love and companionship into my life. Thank you, Pawsome, for making our forever bond possible.",
-    },
-    {
-      name: "James",
-      imageSource: TestimonyJames,
-      imageAlt: "testimony-james.png",
-      text: "Adopting my beloved pet from Pawsome has been an absolute blessing. Their presence has brought immense joy, laughter, and a sense of purpose to my life. I am eternally grateful to Pawsome for making this incredible connection possible.",
-    },
-    {
-      name: "Ruby",
-      imageSource: TestimonyRubby,
-      imageAlt: "testimony-rubby.png",
-      text: "Choosing to adopt from Pawsome was the best choice I ever made. My four-legged companion has filled my world with love, laughter, and cherished moments. Thank you, Pawsome, for helping us find each other and creating a forever home.",
-    },
-  ];
 
   let [currentTesti, setCurrentTesti] = useState(0);
 
@@ -105,7 +45,7 @@ export default function LandingPage() {
   };
 
   const prevTesti = (decrement) => {
-    if (currentTesti == 0) setCurrentTesti(testimonies.length);
+    if (currentTesti == 0) setCurrentTesti(testimonies.length - 1);
     else setCurrentTesti(currentTesti - decrement);
   };
 
@@ -113,7 +53,7 @@ export default function LandingPage() {
     <>
       <Header />
 
-      <div className="content container mb-10 flex flex-col gap-28 relative px-[135px]">
+      <div className="content mb-10 flex flex-col gap-28 relative px-[80px]">
         <section className="jumbotron flex justify-between mt-[46px]">
           <div className="text-jumbotron w-[580px]">
             <div className="text-5xl font-semibold leading-normal mb-2 py-2">
@@ -214,7 +154,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="flyer-secondary h-[253px] border-radius rounded-[64px] shadow bg-gradient-to-br from-amber-300 via-amber-300 to-orange-400 flex gap-8">
+        <section className="flyer-secondary h-[253px] border-radius rounded-[64px] shadow bg-gradient-to-br from-amber-300 via-amber-300 to-orange-400 flex">
           <BoxImage
             borderRadius="rounded-sm"
             bgColor="bg-transparent"
@@ -259,7 +199,7 @@ export default function LandingPage() {
           <BoxImage
             borderRadius="rounded-none"
             bgColor="bg-transparent"
-            className="w-80 h-[480px] flex justify-center absolute right-[126px]"
+            className="w-80 h-[480px] flex justify-center absolute right-[100px]"
           >
             <img
               src={FunnyDog}
@@ -344,7 +284,7 @@ export default function LandingPage() {
         <section className="testimony h-[370px] relative overflow-hidden">
           <div className="testimony-content w-[1210px] flex justify-between overflow-hidden">
             <div
-              className="carousel-testimony w-[1210px] flex transition ease-in duration-75"
+              className="carousel-testimony w-full flex gap-[20px] transition ease-in duration-75"
               style={{
                 transform: `translateX(-${currentTesti * 100}%)`,
                 transition: "opacity 1s ease-in-out",
@@ -353,7 +293,7 @@ export default function LandingPage() {
               {testimonies.map((testi, index) => {
                 return (
                   <div
-                    className="box-testimony flex gap-[30px] transition ease-in duration-75"
+                    className="box-testimony flex gap-[10px] transition ease-in duration-75"
                     style={{
                       transition: "opacity 1s ease-in-out",
                       opacity: currentTesti === index ? 1 : 0,
@@ -411,9 +351,11 @@ export default function LandingPage() {
             <div className="text-2xl text-primary">
               Already made up your mind?
             </div>
-            <div className="text-[32px] font-black">
-              Ready to adopt? Take the next step and give a deserving pet a
-              loving home.
+            <div className="text-[32px]">
+              <p className="font-black">
+                Ready to adopt? Take the next step and give a deserving pet a
+                loving home.
+              </p>
             </div>
           </div>
           <div className="inline-flex justify-center gap-6">
@@ -421,7 +363,7 @@ export default function LandingPage() {
               type="button"
               outerClassName="text-white"
               borderColor="primary"
-              btnClassName="w-[170px] bg-primary hover:bg-hoverPrimary text-lg font-semibold leading-normal py-[18px]"
+              btnClassName="w-[170px] bg-primary hover:bg-hoverPrimary text-base font-semibold tracking-wide leading-normal py-[18px]"
             >
               Find pet now
             </Button>
@@ -429,7 +371,7 @@ export default function LandingPage() {
               type="button"
               outerClassName="w-[170px] text-primary hover:text-white"
               borderColor="primary"
-              btnClassName="w-[170px] hover:bg-primary text-lg font-semibold leading-normal py-[18px]"
+              btnClassName="w-[170px] hover:bg-primary text-base font-semibold tracking-wide leading-normal py-[18px]"
             >
               Discuss with us
             </Button>
